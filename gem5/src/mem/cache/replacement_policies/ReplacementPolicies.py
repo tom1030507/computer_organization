@@ -90,3 +90,26 @@ class RRIPRP(BRRIPRP):
 class NRURP(BRRIPRP):
     btp = 0
     max_RRPV = 1
+
+class EnergyAwareRP(BaseReplacementPolicy):
+    type = 'EnergyAwareRP'
+    cxx_class = 'EnergyAwareRP'
+    cxx_header = "mem/cache/replacement_policies/energy_aware_rp.hh"
+    
+    # Configuration parameters for the energy-aware cost function
+    frequency_bits = Param.Int(4, "Number of bits for access frequency counter")
+    write_bits = Param.Int(4, "Number of bits for write access counter")
+    
+    # Weight parameters for the cost function
+    recency_weight = Param.Float(0.3, "Weight for recency factor in cost function")
+    frequency_weight = Param.Float(0.25, "Weight for frequency factor in cost function")
+    write_weight = Param.Float(0.2, "Weight for write intensity factor in cost function")
+    dirty_weight = Param.Float(0.15, "Weight for dirty bit factor in cost function")
+    utilization_weight = Param.Float(0.1, "Weight for utilization factor in cost function")
+    
+    # PCM energy cost parameters
+    pcm_write_cost = Param.Float(10.0, "PCM write energy cost multiplier")
+    pcm_read_cost = Param.Float(1.0, "PCM read energy cost multiplier")
+    
+    # Cache configuration
+    block_size = Param.Int(64, "Cache block size in bytes")

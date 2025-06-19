@@ -34,6 +34,7 @@ SimObject('ReplacementPolicies.py')
 
 Source('bip_rp.cc')
 Source('brrip_rp.cc')
+Source('energy_aware_rp.cc')
 Source('fifo_rp.cc')
 Source('lfu_rp.cc')
 Source('lru_rp.cc')
